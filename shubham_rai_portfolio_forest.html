@@ -1,0 +1,239 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  .pf{font-family:'DM Sans',sans-serif;background:#0d1410;color:#e8f5ee;min-height:100vh;overflow-x:hidden}
+  .hero{position:relative;padding:64px 48px 80px;border-bottom:0.5px solid rgba(110,231,160,0.08)}
+  .hero-accent{position:absolute;top:-60px;right:-60px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(110,231,160,0.1) 0%,transparent 70%);pointer-events:none}
+  .status-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(110,231,160,0.08);border:0.5px solid rgba(110,231,160,0.25);color:#6ee7a0;font-size:11px;font-weight:500;letter-spacing:0.1em;padding:5px 14px;border-radius:100px;margin-bottom:28px;text-transform:uppercase}
+  .status-dot{width:6px;height:6px;background:#6ee7a0;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+  .hero-name{font-family:'DM Serif Display',serif;font-size:clamp(48px,6vw,80px);line-height:1;color:#e8f5ee;letter-spacing:-0.02em;margin-bottom:12px}
+  .hero-name em{color:#6ee7a0;font-style:italic}
+  .hero-title{font-size:15px;color:rgba(196,221,208,0.45);font-weight:300;letter-spacing:0.13em;text-transform:uppercase;margin-bottom:32px}
+  .hero-links{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:7px;border:0.5px solid rgba(110,231,160,0.15);color:rgba(196,221,208,0.6);font-size:13px;text-decoration:none;transition:all 0.2s;cursor:pointer;background:none;font-family:'DM Sans',sans-serif}
+  .btn:hover{border-color:#6ee7a0;color:#6ee7a0;background:rgba(110,231,160,0.06)}
+  .btn-primary{background:#6ee7a0;color:#0d1410;border-color:#6ee7a0;font-weight:500}
+  .btn-primary:hover{background:#86ecb0;color:#0d1410}
+  .hero-stats{display:flex;gap:44px;margin-top:52px;padding-top:44px;border-top:0.5px solid rgba(110,231,160,0.08);flex-wrap:wrap}
+  .stat-num{font-family:'DM Serif Display',serif;font-size:38px;color:#6ee7a0;line-height:1}
+  .stat-label{font-size:11px;color:rgba(196,221,208,0.35);margin-top:5px;text-transform:uppercase;letter-spacing:0.09em}
+  .nav{display:flex;border-bottom:0.5px solid rgba(110,231,160,0.08);background:rgba(13,20,16,0.94);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;padding:0 48px;overflow-x:auto}
+  .nav-btn{padding:17px 20px;font-size:13px;color:rgba(196,221,208,0.35);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;white-space:nowrap;font-family:'DM Sans',sans-serif}
+  .nav-btn:hover{color:rgba(196,221,208,0.75)}
+  .nav-btn.active{color:#6ee7a0;border-bottom-color:#6ee7a0}
+  .sections{padding:0 48px 96px}
+  .section{display:none;padding-top:56px}
+  .section.active{display:block;animation:fadeUp 0.3s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:0.18em;color:#6ee7a0;text-transform:uppercase;margin-bottom:8px}
+  .section-title{font-family:'DM Serif Display',serif;font-size:36px;color:#e8f5ee;line-height:1.1;margin-bottom:40px}
+  .exp-card{border:0.5px solid rgba(110,231,160,0.1);border-radius:14px;padding:32px 36px;background:rgba(110,231,160,0.02)}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:4px}
+  .exp-role{font-size:17px;font-weight:500;color:#e8f5ee}
+  .exp-date{font-size:11px;color:#6ee7a0;background:rgba(110,231,160,0.08);padding:4px 12px;border-radius:100px;white-space:nowrap}
+  .exp-company{font-size:13px;color:rgba(196,221,208,0.38);margin-bottom:28px}
+  .exp-group{margin-bottom:22px}
+  .exp-group:last-child{margin-bottom:0}
+  .exp-group-title{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(110,231,160,0.55);margin-bottom:10px;padding-bottom:7px;border-bottom:0.5px solid rgba(110,231,160,0.07)}
+  .exp-list{list-style:none}
+  .exp-list li{font-size:14px;color:rgba(196,221,208,0.58);line-height:1.72;padding:4px 0 4px 18px;position:relative}
+  .exp-list li::before{content:'';position:absolute;left:0;top:13px;width:4px;height:4px;background:rgba(110,231,160,0.4);border-radius:50%}
+  .exp-list li strong{color:rgba(232,245,238,0.9);font-weight:500}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+  .skill-group{border:0.5px solid rgba(110,231,160,0.1);border-radius:12px;padding:22px 24px;background:rgba(110,231,160,0.02)}
+  .skill-group-label{font-size:11px;letter-spacing:0.15em;color:#6ee7a0;text-transform:uppercase;margin-bottom:14px}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-size:12px;padding:5px 12px;border-radius:6px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.08);color:rgba(196,221,208,0.6)}
+  .tag.hot{background:rgba(110,231,160,0.08);border-color:rgba(110,231,160,0.2);color:#6ee7a0}
+  .awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .award-card{border:0.5px solid rgba(110,231,160,0.1);border-radius:12px;padding:22px 24px;background:rgba(110,231,160,0.02);transition:all 0.2s}
+  .award-card:hover{border-color:rgba(110,231,160,0.28);background:rgba(110,231,160,0.05)}
+  .award-icon{width:32px;height:32px;border-radius:8px;background:rgba(110,231,160,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .award-icon svg{width:15px;height:15px;fill:#6ee7a0}
+  .award-title{font-size:13px;font-weight:500;color:#e8f5ee;margin-bottom:5px}
+  .award-date{font-size:12px;color:rgba(196,221,208,0.38)}
+  .edu-card{border:0.5px solid rgba(110,231,160,0.1);border-radius:14px;padding:32px 36px;background:rgba(110,231,160,0.02)}
+  .edu-deg{font-size:19px;font-weight:500;color:#e8f5ee;margin-bottom:8px}
+  .edu-school{font-size:14px;color:#6ee7a0;margin-bottom:6px}
+  .edu-dates{font-size:13px;color:rgba(196,221,208,0.38)}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .contact-card{border:0.5px solid rgba(110,231,160,0.1);border-radius:12px;padding:22px 24px;background:rgba(110,231,160,0.02);transition:all 0.2s;text-decoration:none;display:block}
+  .contact-card:hover{border-color:rgba(110,231,160,0.28);background:rgba(110,231,160,0.05)}
+  .contact-label{font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:rgba(196,221,208,0.32);margin-bottom:8px}
+  .contact-val{font-size:14px;color:rgba(196,221,208,0.72)}
+</style>
+
+<div class="pf">
+  <div class="hero">
+    <div class="hero-accent"></div>
+    <div style="position:relative;z-index:1">
+      <div class="status-pill"><div class="status-dot"></div>Open to opportunities</div>
+      <h1 class="hero-name">Shubham<br><em>Rai</em></h1>
+      <p class="hero-title">Sr. Software Engineer &nbsp;·&nbsp; Bangalore, India</p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="mailto:raishubham1109@gmail.com">raishubham1109@gmail.com</a>
+        <a class="btn" href="https://linkedin.com" target="_blank">LinkedIn ↗</a>
+        <a class="btn" href="tel:+918299506390">+91 82995 06390</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">6+</div><div class="stat-label">Years experience</div></div>
+        <div><div class="stat-num">50%</div><div class="stat-label">Traffic increase</div></div>
+        <div><div class="stat-num">4×</div><div class="stat-label">Employee of Month</div></div>
+        <div><div class="stat-num">40%</div><div class="stat-label">Fewer bugs shipped</div></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="show('exp',this)">Experience</button>
+    <button class="nav-btn" onclick="show('skills',this)">Skills</button>
+    <button class="nav-btn" onclick="show('awards',this)">Awards</button>
+    <button class="nav-btn" onclick="show('edu',this)">Education</button>
+    <button class="nav-btn" onclick="show('contact',this)">Contact</button>
+  </nav>
+
+  <div class="sections">
+    <div class="section active" id="sec-exp">
+      <p class="section-label">Career</p>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Sr. Software Developer</div>
+          <div class="exp-date">Jul 2019 – Present</div>
+        </div>
+        <div class="exp-company">Tricon Infotech · Bangalore, India</div>
+        <div class="exp-group">
+          <div class="exp-group-title">React.js Revamp & Performance Enhancement</div>
+          <ul class="exp-list">
+            <li>Architected scalable, reusable React components handling complex UI flows and extensive API integrations.</li>
+            <li>Implemented <strong>Zustand-based global state management</strong> for predictable updates and minimal unnecessary re-renders.</li>
+            <li>Executed migration to <strong>Vite</strong> — faster startup, improved build performance, and efficient HMR.</li>
+            <li>Applied memoization, selective state subscriptions, and controlled re-renders, boosting component rendering performance by <strong>15–40%</strong>.</li>
+            <li>Transformed legacy Vanilla JS codebase to React.js, achieving a <strong>50% increase in site traffic</strong> through improved UX and accessibility.</li>
+            <li>Refactored legacy code reducing overall lines by <strong>20–40%</strong>, improving readability and maintainability.</li>
+            <li>Decreased reported bugs by <strong>20–30%</strong> through improved code organization and easier debugging.</li>
+            <li>Led dependency upgrades and package maintenance, resolving breaking changes and improving stability.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <div class="exp-group-title">Seamless User Flow & Accessibility</div>
+          <ul class="exp-list">
+            <li>Ensured full WCAG accessibility for <strong>CK12</strong> — screen reader compatibility, keyboard navigation, adequate contrast ratios, and mobile friendliness.</li>
+            <li>Improved the <strong>Electronic Health Record (EHR) tool</strong> accessibility and usability, resulting in a 40% increase in tool utilization.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <div class="exp-group-title">Facilitating Theory-Application Connections</div>
+          <ul class="exp-list">
+            <li>Designed interactive tools aiding students in linking theoretical concepts with practical applications.</li>
+            <li>Developed distinct modules for matching, ranking, and grouping — supporting holistic learning environments for teachers and students.</li>
+            <li>Built an <strong>auto-graded learning tool within Excel</strong> with automated feedback and assessment.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <div class="exp-group-title">API Development & Migration</div>
+          <ul class="exp-list">
+            <li>Migrated API endpoints from <strong>Elasticsearch to PostgreSQL</strong> using SQLAlchemy ORM and FastAPI.</li>
+            <li>Redesigned <strong>Pydantic models</strong> for request/response validation while preserving existing API contracts.</li>
+            <li>Replaced Elasticsearch filters and aggregations with equivalent, optimized SQL queries.</li>
+            <li>Ensured data consistency and integrity across the migration through thorough testing and validation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-skills">
+      <p class="section-label">Technical</p>
+      <h2 class="section-title">Skills & Stack</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-label">Frontend</div>
+          <div class="skill-tags">
+            <span class="tag hot">React</span><span class="tag hot">TypeScript</span><span class="tag hot">JavaScript</span><span class="tag hot">Zustand</span><span class="tag">Redux</span><span class="tag">Angular</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Backend</div>
+          <div class="skill-tags">
+            <span class="tag hot">Python</span><span class="tag hot">FastAPI</span><span class="tag">SQLAlchemy</span><span class="tag">Pydantic</span><span class="tag">RESTful APIs</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Database</div>
+          <div class="skill-tags">
+            <span class="tag hot">PostgreSQL</span><span class="tag">Amazon Redshift</span><span class="tag">MongoDB</span><span class="tag">Elasticsearch</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools & Infrastructure</div>
+          <div class="skill-tags">
+            <span class="tag hot">Git</span><span class="tag hot">Vite</span><span class="tag">npm</span><span class="tag">CI/CD</span><span class="tag">AWS</span><span class="tag">Monorepo</span><span class="tag">Agile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-awards">
+      <p class="section-label">Recognition</p>
+      <h2 class="section-title">Awards & Achievements</h2>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="award-title">Employee of the Month</div><div class="award-date">September 2024</div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="award-title">Employee of the Month</div><div class="award-date">March 2023</div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="award-title">Employee of the Month</div><div class="award-date">July 2022</div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="award-title">Employee of the Month</div><div class="award-date">October 2021</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-edu">
+      <p class="section-label">Academic</p>
+      <h2 class="section-title">Education</h2>
+      <div class="edu-card">
+        <div class="edu-deg">B.Tech — Computer Science</div>
+        <div class="edu-school">Kanpur University</div>
+        <div class="edu-dates">Aug 2015 – May 2019 · Kanpur</div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-contact">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="tel:+918299506390">
+          <div class="contact-label">Phone</div><div class="contact-val">+91 82995 06390</div>
+        </a>
+        <a class="contact-card" href="mailto:raishubham1109@gmail.com">
+          <div class="contact-label">Email</div><div class="contact-val">raishubham1109@gmail.com</div>
+        </a>
+        <a class="contact-card" href="https://linkedin.com" target="_blank">
+          <div class="contact-label">LinkedIn</div><div class="contact-val">View Profile ↗</div>
+        </a>
+        <div class="contact-card">
+          <div class="contact-label">Location</div><div class="contact-val">Bangalore, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(tab,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
